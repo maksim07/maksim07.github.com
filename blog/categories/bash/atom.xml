@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[maksim07's blog]]></title>
-  <link href="http://maksim07.github.com/atom.xml" rel="self"/>
+  <title><![CDATA[Category: bash | maksim07's blog]]></title>
+  <link href="http://maksim07.github.com/blog/categories/bash/atom.xml" rel="self"/>
   <link href="http://maksim07.github.com/"/>
   <updated>2012-12-22T20:18:58+04:00</updated>
   <id>http://maksim07.github.com/</id>
@@ -30,7 +30,7 @@
 <p>Для иллюстрации возможностей Bash QL рассмотрим два примера. В обоих случаях анализируется лог web-сервера,
 например nginx:</p>
 
-<figure class='code'><figcaption><span>фрагмент лога </span></figcaption>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>фрагмент лога </span></figcaption>
 <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -40,13 +40,12 @@
 </span><span class='line'>127.0.0.1 - - [07/Mar/2004:16:06:51 -0400] "GET /index.html HTTP/1.1" 200 4523
 </span><span class='line'>10.10.0.1 - - [07/Mar/2004:16:06:52 -0400] "GET /main.html HTTP/1.1" 200 42234
 </span><span class='line'>10.10.0.21 - - [07/Mar/2004:16:06:53 -0400] "GET /01.html HTTP/1.1" 200 14234
-</span><span class='line'>...</span></code></pre></td></tr></table></div></figure>
-
+</span><span class='line'>...</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Полезный отчет, который можно получить по этому логу - выявление ботов на основании количества запросов,
 сделанных с одного IP-адреса. Например, будем считать, что если с одного IP сделано больше 1000 запросов, то это робот.</p>
 
-<figure class='code'><figcaption><span>выявление ботов  </span></figcaption>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>выявление ботов  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -55,30 +54,27 @@
 </span><span class='line'>2311 10.0.0.10
 </span><span class='line'>14351 10.0.0.11
 </span><span class='line'>53312 127.0.0.1
-</span></code></pre></td></tr></table></div></figure>
-
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>В этом примере мы получили ip-адреса трех ботов и количество сгенерированных ими запросов к web-серверу.</p>
 
 <p>В следующем примере по логам формируется отчет по ошибкам:</p>
 
-<figure class='code'><figcaption><span>отчет по ошибкам http  </span></figcaption>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>отчет по ошибкам http  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat access.log | awk <span class="s1">&#39;{if ($9 != 200) print $9}&#39;</span> | sort | uniq -c | sort -n
 </span><span class='line'>12 500
 </span><span class='line'>3234 404
-</span></code></pre></td></tr></table></div></figure>
-
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Команды Bash SQL можно разделить на две категории: команды получения данных и команды анализа данных.
 Запрос на Bash QL начинается с команды получения данных и содержит несколько команд анализа данных, который объеденены
 в конвейер. В предыдущем примере запрос начинается командой получения данных их файла <strong>cat</strong>, данные которой обрабатываются
 командами анализа данных <strong>awk</strong>, <strong>sort</strong> и <strong>uniq</strong>.</p>
 
-<blockquote><p>QUERY ::= DATA_COMMAND (| ANALYSIS_COMMAND)* [> OUTPUT_FILE]</p></blockquote>
-
+<p><blockquote><p>QUERY ::= DATA_COMMAND (| ANALYSIS_COMMAND)* [> OUTPUT_FILE]</p></blockquote></p>
 
 <p>Далее перечислены основные команды из обеих категорий.</p>
 
@@ -95,7 +91,7 @@
 сортировки есть флаг <strong>-r</strong>.
 По умолчанию, исходный файл воспринимается как таблица с одной колонкой.</p>
 
-<figure class='code'><figcaption><span>Пример сортировки (по возрасту)  </span></figcaption>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Пример сортировки (по возрасту)  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -112,8 +108,7 @@
 </span><span class='line'>Sergey Sidorov 17
 </span><span class='line'>Ivan Ivanov 23
 </span><span class='line'>Petr Petrov 43
-</span></code></pre></td></tr></table></div></figure>
-
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>uniq</h3>
 
@@ -137,10 +132,9 @@
 команд вида: PATTERN {ACTION}. Если строка исходного файла удовлетворяет шаблону PATTERN, то выполняется действие ACTION.
 Слудующий запрос анализирует лог web-сервера и вычисляет количество запросов вида <em>/index.html</em> в интервале 10:00-11:00:</p>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat access.log | awk <span class="s1">&#39;/\/index\.html/ {H=substr($4, 14, 2); if (H&gt;=10 &amp;&amp; H&lt;11) C=C+1} END {print C}&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat access.log | awk <span class="s1">&#39;/\/index.html/ {H=substr($4, 14, 2); if (H&gt;=10 &amp;amp;&amp;amp; H&amp;lt;11) C=C+1} END {print C}&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>Здесь есть две команды AWK: первая выполняется если текущая строка содержит <em>/index.html</em>, вторая выполняется в
 том случае, если строка последняя в этом файле.</p>
@@ -166,16 +160,15 @@
 Атрибут <strong>-q</strong> означает, что в поток вывода не будет выводиться статистика выполнения <strong>wget</strong>, а <strong>-O -</strong> означает что имя файла для
 записи на указано, следовательно результат будет записан в поток вывода.</p>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>wget -q -O - http://maksim07.github.com
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>wget -q -O - http://maksim07.github.com&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'>&lt;!DOCTYPE html&gt;
+</span><span class='line'>&lt;p&gt;&amp;lt;!DOCTYPE html&gt;
 </span><span class='line'>...
-</span></code></pre></td></tr></table></div></figure>
-
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>curl</h3>
 
@@ -191,7 +184,7 @@
 ограничение - использется алгоритм sort join, следовательно файлы должны быть отсортированы по этим полям. Для подготовки файлов
 может пригодиться команда <strong>sort</strong>. В следующем примере осуществляется join двух таблиц из разных БД.</p>
 
-<figure class='code'><figcaption><span>Пример join  </span></figcaption>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Пример join  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -207,23 +200,46 @@
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>&lt;/p&gt;
 </span><span class='line'>
-</span><span class='line'><span class="c"># получение первой таблицы в файл employees.data: идентификатор, имя сотрудника, идентификатор департамента</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s1">&#39;select id, name, depid from employees order by depid&#39;</span> | mysql database1 &gt; employees.data
+</span><span class='line'>&lt;h1&gt;!/bin/bash&lt;/h1&gt;
 </span><span class='line'>
-</span><span class='line'><span class="c"># получение второй таблицы в файл departments.data: идентификатор департамента, название </span>
-</span><span class='line'><span class="nb">echo</span> <span class="s1">&#39;select id, name from department order by id&#39;</span> | mysql database2 &gt; departments.data
+</span><span class='line'>&lt;h1&gt;получение первой таблицы в файл employees.data: идентификатор, имя сотрудника, идентификатор департамента&lt;/h1&gt;
 </span><span class='line'>
-</span><span class='line'><span class="c"># join двух файлов по идентификатору департамента. В результате получаем таблицу вида:</span>
-</span><span class='line'><span class="c"># идентификатор департамента (ключ для join), все поля первого файлв без ключа (id и имя пользователя)</span>
-</span><span class='line'><span class="c"># все поля второго файла без ключа (название департамента) Пример результата:</span>
-</span><span class='line'><span class="c"># 1 1 Petrov IT</span>
-</span><span class='line'><span class="c"># 1 2 Sidorov IT</span>
-</span><span class='line'><span class="c"># 2 3 Ivanov Accounting</span>
-</span><span class='line'>join -t <span class="s2">&quot; &quot;</span> -1 3 -2 1 employees.data departments.data
-</span></code></pre></td></tr></table></div></figure>
-
+</span><span class='line'>&lt;p&gt;echo <span class="s1">&#39;select id, name, depid from employees order by depid&#39;</span> | mysql database1 &gt; employees.data&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;получение второй таблицы в файл departments.data: идентификатор департамента, название&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;echo <span class="s1">&#39;select id, name from department order by id&#39;</span> | mysql database2 &gt; departments.data&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;join двух файлов по идентификатору департамента. В результате получаем таблицу вида:&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;идентификатор департамента <span class="o">(</span>ключ для join<span class="o">)</span>, все поля первого файлв без ключа <span class="o">(</span>id и имя пользователя<span class="o">)</span>&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;все поля второго файла без ключа <span class="o">(</span>название департамента<span class="o">)</span> Пример результата:&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;1 1 Petrov IT&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;1 2 Sidorov IT&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;h1&gt;2 3 Ivanov Accounting&lt;/h1&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;join -t <span class="s2">&quot; &quot;</span> -1 3 -2 1 employees.data departments.data&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <h3>mysql, psql и т.д.</h3>
 
