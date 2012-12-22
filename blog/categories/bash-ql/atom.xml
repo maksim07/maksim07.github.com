@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bash ql | maksim07's blog]]></title>
   <link href="http://maksim07.github.com/blog/categories/bash-ql/atom.xml" rel="self"/>
   <link href="http://maksim07.github.com/"/>
-  <updated>2012-12-22T20:18:58+04:00</updated>
+  <updated>2012-12-23T01:29:07+04:00</updated>
   <id>http://maksim07.github.com/</id>
   <author>
     <name><![CDATA[maksim07]]></name>
@@ -22,7 +22,7 @@
 извлечения и анализа данных. Можно сказать, что эти команды образуют язык запросов - bash query language.
 На этом языке можно разрабатывать целые программы по обработке данных, его очень просто использовать -
 для этого достаточно открыть терминал. В этой статье я расскажу о базовых командах Bash QL, более подробную
-информацию можно найти в мануалах Linux.</p>
+информацию о них можно найти в мануалах Linux.</p>
 
 <!--more-->
 
@@ -69,9 +69,9 @@
 </span><span class='line'>3234 404
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>Команды Bash SQL можно разделить на две категории: команды получения данных и команды анализа данных.
+<p>Команды Bash SQL можно разделить на две категории: команды получения и анализа данных.
 Запрос на Bash QL начинается с команды получения данных и содержит несколько команд анализа данных, который объеденены
-в конвейер. В предыдущем примере запрос начинается командой получения данных их файла <strong>cat</strong>, данные которой обрабатываются
+в конвейер. В предыдущем примере запрос начинается командой <strong>cat</strong>, данные которой обрабатываются
 командами анализа данных <strong>awk</strong>, <strong>sort</strong> и <strong>uniq</strong>.</p>
 
 <p><blockquote><p>QUERY ::= DATA_COMMAND (| ANALYSIS_COMMAND)* [> OUTPUT_FILE]</p></blockquote></p>
@@ -80,18 +80,18 @@
 
 <h2>Команды анализа данных</h2>
 
-<p>Будем считать, что всем этим командам данные передаются в стандартный ввод, хотя большиноство из них можно использовать иначе.
-Результат своей работы эти команды отправляют на стандартный поток вывода.
-Чтобы получить данные для анализа нужно использовать команды получения данных.</p>
+<p>Будем считать, что всем этим командам этой категории данные передаются на стандартный ввод,
+хотя большинство из них можно использовать и иначе.
+Результат своей работы эти команды отправляют на стандартный поток вывода.</p>
 
 <h3>sort</h3>
 
 <p>Эта команда позволяет отсортировать строки исходного файла. Если указать флаг <strong>-n</strong>, то строки будут сортироваться в соответствие
-со своим числовым значением. Можно сортировать по одному полю или по диапазону полей при поможи опций <strong>-k POS</strong> и <strong>-t SEP</strong>. Для обратной
+со своим числовым значением. Можно сортировать по одному полю или по диапазону полей при помощи опций <strong>-k POS</strong> и <strong>-t SEP</strong>. Для обратной
 сортировки есть флаг <strong>-r</strong>.
 По умолчанию, исходный файл воспринимается как таблица с одной колонкой.</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Пример сортировки (по возрасту)  </span></figcaption>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>пример сортировки (по возрасту)  </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -121,28 +121,50 @@
 
 <h3>grep</h3>
 
-<p>Пожалуй самая популярная команда для анализа данных. Она позволяет отфильтровать исходный файл - оставить в нем только те строки, которые
+<p>Пожалуй, самая популярная команда для анализа данных. Она позволяет отфильтровать исходный файл - оставить в нем только те строки, которые
 удовлетворяют шаблону. Если шаблонов несколько, то их можно указать несколькими атрибутами <strong>-e PATTERN</strong>.
 Если шаблон один, то его можно указать первым аргументом команды. Для того, чтобы получить строки исходного файла, которые не
 удовлетворяют шаблону, есть флаг <strong>-v</strong>.</p>
 
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>пример grep </span></figcaption>
+<div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat example.txt | grep -e Ivan -e Petr
+</span><span class='line'>Ivan Ivanov 23
+</span><span class='line'>Petr Petrov 43</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
 <h3>awk</h3>
 
-<p>AWK - интерпретатор языка для извлечения данных и построения отчетов. Типичная программа на AWK состоит из
+<p>AWK - это интерпретатор языка для извлечения данных и построения отчетов. Типичная программа на AWK состоит из
 команд вида: PATTERN {ACTION}. Если строка исходного файла удовлетворяет шаблону PATTERN, то выполняется действие ACTION.
-Слудующий запрос анализирует лог web-сервера и вычисляет количество запросов вида <em>/index.html</em> в интервале 10:00-11:00:</p>
+Следующий запрос анализирует лог web-сервера и вычисляет количество запросов вида <em>/index.html</em> в интервале 10:00-11:00:</p>
 
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>пример awk  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat access.log | awk <span class="s1">&#39;/\/index.html/ {H=substr($4, 14, 2); if (H&gt;=10 &amp;amp;&amp;amp; H&amp;lt;11) C=C+1} END {print C}&#39;</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>Здесь есть две команды AWK: первая выполняется если текущая строка содержит <em>/index.html</em>, вторая выполняется в
-том случае, если строка последняя в этом файле.</p>
+<p>В этом запросе есть две команды AWK: первая выполняется если текущая строка содержит <em>/index.html</em>, вторая выполняется в
+том случае, если это последняя строка в файле.</p>
 
 <h3>sed</h3>
 
 <p>SED - также как и AWK интерпретирует команды на специальном языке для манипуляции строками исходного файла.
-<a href="http://www.grymoire.com/Unix/Sed.html">Здесь</a> можно найти информацию о sed.</p>
+Среди команд sed: замена (substitute), удаление (delete), замена (change) и т.д.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>пример sed: замена пробелов на запятые  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat example.txt | sed <span class="s1">&#39;s/ /,/g&#39;</span>
+</span><span class='line'>Ivan,Ivanov,23
+</span><span class='line'>Petr,Petrov,43
+</span><span class='line'>Sergey,Sidorov,17
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p><a href="http://www.grymoire.com/Unix/Sed.html">Здесь</a> можно найти информацию о sed.</p>
 
 <h3>wc</h3>
 
@@ -150,15 +172,14 @@
 
 <h2>Команды получения данных</h2>
 
-<p>Это команды посредством которых можно доставить данные для анализа из разных источников данных. Другими
-словами - при помощи этих команд можно получить поток ввода для команд анализа данных.</p>
+<p>При помощи этих команд формируются исходные потоки данных для команд анализа.</p>
 
 <h3>wget</h3>
 
 <p>Получение файла по http, ftp и другим популярным протоколам. По умолчнию, эта команда сохраняет url в файл. Для того,
-чтобы она работала как нужно, тоесть записывала данные в стандартный поток вывода нужно использовать атрибуты <strong>-q -O -</strong>.
-Атрибут <strong>-q</strong> означает, что в поток вывода не будет выводиться статистика выполнения <strong>wget</strong>, а <strong>-O -</strong> означает что имя файла для
-записи на указано, следовательно результат будет записан в поток вывода.</p>
+чтобы она работала как нужно, то есть записывала данные в стандартный поток вывода нужно использовать атрибуты <strong>-q -O -</strong>.
+Атрибут <strong>-q</strong> означает, что в поток вывода не будет выводиться статистика выполнения <strong>wget</strong>, а <strong>-O -</strong> означает, что имя файла для
+записи не указано, следовательно результат будет записан в поток вывода.</p>
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
