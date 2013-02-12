@@ -159,8 +159,8 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Команды Bash SQL можно разделить на две категории: команды получения и анализа данных.
-Запрос на Bash QL начинается с команды получения данных и содержит несколько команд анализа данных, который объеденены
+<p>Команды Bash QL можно разделить на две категории: команды получения и анализа данных.
+Запрос на Bash QL начинается с команды получения данных и содержит несколько команд анализа данных, которые объеденены
 в конвейер. В предыдущем примере запрос начинается командой <strong>cat</strong>, данные которой обрабатываются
 командами анализа данных <strong>awk</strong>, <strong>sort</strong> и <strong>uniq</strong>.</p>
 
@@ -252,14 +252,15 @@
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat example.txt | sed <span class="s1">&#39;s/ /,/g&#39;</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat example.txt | sed -r <span class="s1">&#39;s/ /,/g&#39;</span>
 </span><span class='line'>Ivan,Ivanov,23
 </span><span class='line'>Petr,Petrov,43
 </span><span class='line'>Sergey,Sidorov,17
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p><a href="http://www.grymoire.com/Unix/Sed.html">Здесь</a> можно найти информацию о sed.</p>
+<p>Параметр <strong>-r</strong> нужен для использования расширенных регулярных выражений.
+<a href="http://www.grymoire.com/Unix/Sed.html">Здесь</a> можно найти информацию о sed.</p>
 
 <h3>wc</h3>
 
@@ -423,7 +424,7 @@
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2012 - maksim07 -
+  Copyright &copy; 2013 - maksim07 -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | maksim07's blog]]></title>
   <link href="http://maksim07.github.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://maksim07.github.com/"/>
-  <updated>2012-12-23T01:29:07+04:00</updated>
+  <updated>2013-02-12T22:27:48+04:00</updated>
   <id>http://maksim07.github.com/</id>
   <author>
     <name><![CDATA[maksim07]]></name>
@@ -69,8 +69,8 @@
 </span><span class='line'>3234 404
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p>Команды Bash SQL можно разделить на две категории: команды получения и анализа данных.
-Запрос на Bash QL начинается с команды получения данных и содержит несколько команд анализа данных, который объеденены
+<p>Команды Bash QL можно разделить на две категории: команды получения и анализа данных.
+Запрос на Bash QL начинается с команды получения данных и содержит несколько команд анализа данных, которые объеденены
 в конвейер. В предыдущем примере запрос начинается командой <strong>cat</strong>, данные которой обрабатываются
 командами анализа данных <strong>awk</strong>, <strong>sort</strong> и <strong>uniq</strong>.</p>
 
@@ -158,13 +158,14 @@
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat example.txt | sed <span class="s1">&#39;s/ /,/g&#39;</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>cat example.txt | sed -r <span class="s1">&#39;s/ /,/g&#39;</span>
 </span><span class='line'>Ivan,Ivanov,23
 </span><span class='line'>Petr,Petrov,43
 </span><span class='line'>Sergey,Sidorov,17
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
-<p><a href="http://www.grymoire.com/Unix/Sed.html">Здесь</a> можно найти информацию о sed.</p>
+<p>Параметр <strong>-r</strong> нужен для использования расширенных регулярных выражений.
+<a href="http://www.grymoire.com/Unix/Sed.html">Здесь</a> можно найти информацию о sed.</p>
 
 <h3>wc</h3>
 
